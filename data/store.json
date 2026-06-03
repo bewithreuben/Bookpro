@@ -1,0 +1,294 @@
+{
+  "users": [
+    {
+      "id": "usr_customer_1",
+      "role": "customer",
+      "name": "Rob Customer",
+      "email": "customer@bookpro.ng",
+      "phone": "+2348010000001",
+      "passwordHash": "pbkdf2_sha256$210000$S6Z3CFwQUIAONtMdlqPdxw$B3Q5NalX3AcbWWC7FSoKc_nXhRnykmq1DasTQyl0H2c"
+    },
+    {
+      "id": "usr_pro_1",
+      "role": "professional",
+      "name": "Maya Johnson",
+      "email": "maya@bookpro.ng",
+      "phone": "+2348020000001",
+      "passwordHash": "pbkdf2_sha256$210000$6eUrq9YeIOwFi-16f6sbTg$euisdIujv0BoFO_X4WscJ0aIJ2uFKUKJ0OOuBzuAtOE"
+    },
+    {
+      "id": "usr_admin_1",
+      "role": "admin",
+      "name": "BookPro Admin",
+      "email": "admin@bookpro.ng",
+      "phone": "+2348030000001",
+      "passwordHash": "pbkdf2_sha256$210000$RIUaVFQ3_XFnBEVzQQSzfg$DAerXquVyGlL_G5VyGptLufQbxCZd1fXC7K2sxygbWw"
+    }
+  ],
+  "professionals": [
+    {
+      "id": "pro_1",
+      "userId": "usr_pro_1",
+      "name": "Maya Johnson",
+      "initials": "MJ",
+      "service": "Plumbing",
+      "title": "Leak repair specialist",
+      "rating": 4.98,
+      "reviews": 218,
+      "location": "Ikeja",
+      "distance": 2.1,
+      "eta": "18 min",
+      "price": 45000,
+      "jobs": "1,200+",
+      "skills": [
+        "Licensed",
+        "Insured",
+        "Same-day"
+      ],
+      "colors": [
+        "#0f766e",
+        "#457b9d"
+      ],
+      "slots": [
+        "Now",
+        "2:30 PM",
+        "4:00 PM"
+      ],
+      "verificationStatus": "verified",
+      "availability": [
+        "Mon 9-5",
+        "Tue 9-5",
+        "Thu 12-8",
+        "Fri 9-5"
+      ],
+      "uploads": [
+        {
+          "name": "Lagos plumbing permit.pdf",
+          "status": "verified"
+        },
+        {
+          "name": "Insurance certificate.jpg",
+          "status": "verified"
+        },
+        {
+          "name": "Sink repair.png",
+          "status": "live"
+        }
+      ],
+      "bank": {
+        "bankName": "GTBank",
+        "accountName": "Maya Johnson",
+        "accountNumber": "0123456789"
+      },
+      "earnings": {
+        "week": 286000,
+        "completed": 18,
+        "payoutDate": "Friday"
+      }
+    },
+    {
+      "id": "pro_2",
+      "name": "Andre Patel",
+      "initials": "AP",
+      "service": "Electrical",
+      "title": "Panel and fixture expert",
+      "rating": 4.96,
+      "reviews": 176,
+      "location": "Lekki",
+      "distance": 3.4,
+      "eta": "32 min",
+      "price": 60000,
+      "jobs": "840+",
+      "skills": [
+        "Certified",
+        "Emergency",
+        "Warranty"
+      ],
+      "colors": [
+        "#ee6c4d",
+        "#0f766e"
+      ],
+      "slots": [
+        "1:15 PM",
+        "3:45 PM",
+        "6:00 PM"
+      ],
+      "verificationStatus": "verified"
+    },
+    {
+      "id": "pro_3",
+      "name": "Sofia Rivera",
+      "initials": "SR",
+      "service": "Cleaning",
+      "title": "Move-out and deep clean pro",
+      "rating": 4.99,
+      "reviews": 302,
+      "location": "Yaba",
+      "distance": 1.7,
+      "eta": "24 min",
+      "price": 52000,
+      "jobs": "2,100+",
+      "skills": [
+        "Background checked",
+        "Supplies included",
+        "Eco"
+      ],
+      "colors": [
+        "#457b9d",
+        "#f6bd60"
+      ],
+      "slots": [
+        "Now",
+        "5:30 PM",
+        "Tomorrow"
+      ],
+      "verificationStatus": "verified"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "book_1",
+      "customerId": "usr_customer_1",
+      "professionalId": "pro_1",
+      "service": "Plumbing",
+      "location": "Ikeja",
+      "slot": "Today 2:30 PM",
+      "amount": 45000,
+      "status": "confirmed",
+      "paymentStatus": "authorized",
+      "reference": "BP-DEMO-1001"
+    },
+    {
+      "id": "book_2",
+      "customerId": "usr_customer_1",
+      "professionalId": "pro_3",
+      "service": "Cleaning",
+      "location": "Yaba",
+      "slot": "Tomorrow 10:00 AM",
+      "amount": 52000,
+      "status": "completed",
+      "paymentStatus": "released",
+      "reference": "BP-DEMO-1002"
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg_1",
+      "bookingId": "book_1",
+      "from": "Maya Johnson",
+      "body": "I can arrive in 18 minutes. Please confirm parking access.",
+      "createdAt": "2 min ago"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev_1",
+      "bookingId": "book_2",
+      "professionalId": "pro_3",
+      "customerName": "Rob Customer",
+      "rating": 5,
+      "body": "Clean work, arrived early, and shared before/after photos."
+    }
+  ],
+  "disputes": [
+    {
+      "id": "disp_1048",
+      "bookingId": "book_1",
+      "issue": "Customer says work was incomplete",
+      "status": "needs evidence review",
+      "amountHeld": 45000
+    }
+  ],
+  "verificationQueue": [
+    {
+      "id": "verify_1",
+      "name": "Aisha Bello",
+      "trade": "Cleaning",
+      "docs": "NIN, address, insurance",
+      "status": "approved"
+    },
+    {
+      "id": "verify_2",
+      "name": "David Okafor",
+      "trade": "Electrical",
+      "docs": "Lagos State trade permit",
+      "status": "approved"
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay_1780288581439",
+      "bookingId": "book_1",
+      "provider": "paystack",
+      "reference": "BP-DEMO-1001",
+      "amount": 45000,
+      "status": "authorized",
+      "channel": "card"
+    },
+    {
+      "id": "pay_1780288578793",
+      "bookingId": "book_1",
+      "provider": "paystack",
+      "reference": "BP-DEMO-1001",
+      "amount": 45000,
+      "status": "authorized",
+      "channel": "card"
+    },
+    {
+      "id": "pay_1780288576868",
+      "bookingId": "book_1",
+      "provider": "paystack",
+      "reference": "BP-DEMO-1001",
+      "amount": 45000,
+      "status": "authorized",
+      "channel": "card"
+    },
+    {
+      "id": "pay_1",
+      "bookingId": "book_1",
+      "provider": "paystack",
+      "reference": "BP-DEMO-1001",
+      "amount": 45000,
+      "status": "authorized",
+      "channel": "card"
+    }
+  ],
+  "auditLogs": [
+    {
+      "actorId": "usr_admin_1",
+      "action": "verify_worker",
+      "target": "verify_1",
+      "createdAt": "2026-06-01T04:34:44.702Z"
+    },
+    {
+      "actorId": "usr_admin_1",
+      "action": "verify_worker",
+      "target": "verify_1",
+      "createdAt": "2026-06-01T04:34:54.063Z"
+    },
+    {
+      "actorId": "usr_admin_1",
+      "action": "verify_worker",
+      "target": "verify_1",
+      "createdAt": "2026-06-01T04:34:55.642Z"
+    },
+    {
+      "actorId": "usr_admin_1",
+      "action": "verify_worker",
+      "target": "verify_2",
+      "createdAt": "2026-06-01T04:34:56.777Z"
+    },
+    {
+      "actorId": "usr_admin_1",
+      "action": "verify_worker",
+      "target": "verify_2",
+      "createdAt": "2026-06-01T04:34:59.994Z"
+    },
+    {
+      "actorId": "usr_admin_1",
+      "action": "verify_worker",
+      "target": "verify_1",
+      "createdAt": "2026-06-01T04:35:02.059Z"
+    }
+  ]
+}

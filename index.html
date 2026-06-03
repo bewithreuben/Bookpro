@@ -1,0 +1,386 @@
+<!Doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookPro Services</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#customer" data-view="customer" aria-label="BookPro home">
+          <img class="brand-logo" src="assets/bookpro-logo.svg" alt="BookPro Services" />
+        </a>
+
+        <nav class="nav-list" aria-label="Platform areas">
+          <a class="active" href="#customer" data-view="customer"><span>CU</span>Customer</a>
+          <a href="#professional" data-view="professional"><span>PR</span>Professional</a>
+          <a href="#admin" data-view="admin"><span>AD</span>Admin</a>
+        </nav>
+
+        <div class="trust-card">
+          <span class="trust-icon">OK</span>
+          <div>
+            <strong>Marketplace controls</strong>
+            <p>Identity checks, worker verification, protected payments, chat history, ratings, and dispute workflows are connected across all sides.</p>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div class="menu-wrapper">
+            <button class="icon-button menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menuDropdown">Menu</button>
+            <div class="menu-dropdown" id="menuDropdown" role="menu" aria-label="Main menu">
+              <button type="button" role="menuitem" data-view="customer">Customer</button>
+              <button type="button" role="menuitem" data-view="professional">Professional</button>
+              <button type="button" role="menuitem" data-view="admin">Admin</button>
+              <span class="menu-divider"></span>
+              <button type="button" role="menuitem" data-modal="loginModal">Log in</button>
+              <button type="button" role="menuitem" data-modal="signupModal">Sign up</button>
+            </div>
+          </div>
+          <div class="location-chip">
+            <span>Service area</span>
+            <strong>Lagos mainland and island</strong>
+          </div>
+          <div class="auth-actions">
+            <span class="session-pill" id="sessionStatus">Guest</span>
+            <button class="ghost-button" type="button" data-modal="loginModal">Log in</button>
+            <button class="primary-button compact" type="button" data-modal="signupModal">Sign up</button>
+          </div>
+        </header>
+        <section class="view active" id="customer" aria-labelledby="customer-title">
+          <div class="hero-panel">
+            <div>
+              <p class="eyebrow">Customer tab</p>
+              <h1 id="customer-title">Book verified professionals nearby, pay securely, and track every service from request to review.</h1>
+            </div>
+            <form class="booking-search" id="bookingSearch">
+              <label>
+                <span>Search by service</span>
+                <select id="serviceSelect" name="service">
+                  <option value="All">All services</option>
+                  <option value="Plumbing">Plumbing</option>
+                  <option value="Electrical">Electrical</option>
+                  <option value="Cleaning">Cleaning</option>
+                  <option value="Beauty">Beauty</option>
+                  <option value="Auto">Auto repair</option>
+                  <option value="Handyman">Handyman</option>
+                </select>
+              </label>
+              <label>
+                <span>Location</span>
+                <select id="locationSelect" name="location">
+                  <option value="All">Use current location</option>
+                  <option value="Ikeja">Ikeja</option>
+                  <option value="Lekki">Lekki</option>
+                  <option value="Yaba">Yaba</option>
+                  <option value="Surulere">Surulere</option>
+                </select>
+              </label>
+              <label>
+                <span>Appointment</span>
+                <select id="timeSelect" name="time">
+                  <option value="Now">Now</option>
+                  <option value="Today">Today</option>
+                  <option value="Tomorrow">Tomorrow</option>
+                  <option value="Weekend">Weekend</option>
+                </select>
+              </label>
+              <button class="primary-button" type="submit">Find matches</button>
+            </form>
+          </div>
+
+          <section class="quick-categories" aria-label="Popular services">
+            <button class="category active" type="button" data-service="All">All</button>
+            <button class="category" type="button" data-service="Plumbing">Plumbing</button>
+            <button class="category" type="button" data-service="Electrical">Electrical</button>
+            <button class="category" type="button" data-service="Cleaning">Cleaning</button>
+            <button class="category" type="button" data-service="Beauty">Beauty</button>
+            <button class="category" type="button" data-service="Auto">Auto</button>
+            <button class="category" type="button" data-service="Handyman">Handyman</button>
+          </section>
+
+          <div class="customer-layout">
+            <section class="panel" aria-labelledby="matches-title">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Location-based matching</p>
+                  <h2 id="matches-title">Verified workers near you</h2>
+                </div>
+                <span id="resultCount" class="pill"></span>
+              </div>
+              <div id="proList" class="pro-list" aria-live="polite"></div>
+            </section>
+
+            <aside class="stack">
+              <section class="panel">
+                <div class="section-heading">
+                  <div>
+                    <p class="eyebrow">Nearby map</p>
+                    <h2>Live coverage</h2>
+                  </div>
+                  <span class="pill">1-8 km</span>
+                </div>
+                <div class="service-map" aria-hidden="true">
+                  <span class="road road-a"></span>
+                  <span class="road road-b"></span>
+                  <span class="road road-c"></span>
+                  <span class="map-pin pin-a">1</span>
+                  <span class="map-pin pin-b">2</span>
+                  <span class="map-pin pin-c">3</span>
+                  <span class="map-pin pin-d">4</span>
+                  <span class="current-location"></span>
+                </div>
+              </section>
+
+              <section class="booking-card" id="bookingCard">
+                <p class="eyebrow">Book appointment</p>
+                <h2>Select a professional</h2>
+                <p>Pick a verified worker to see arrival slots, chat, call, and payment options.</p>
+              </section>
+            </aside>
+          </div>
+
+          <section class="feature-grid customer-features" aria-label="Customer tools">
+            <article class="panel">
+              <p class="eyebrow">In-app chat and call</p>
+              <div class="chat-window">
+                <div class="chat-row"><strong>Sade</strong><span>I can arrive in 18 minutes.</span></div>
+                <div class="chat-row mine"><strong>You</strong><span>Please call when you are downstairs.</span></div>
+              </div>
+              <div class="button-row">
+                <button class="ghost-button" type="button">Chat</button>
+                <button class="ghost-button" type="button">Call</button>
+              </div>
+            </article>
+            <article class="panel">
+              <p class="eyebrow">Ratings and reviews</p>
+              <h3>4.98 average rating</h3>
+              <p class="muted">Recent reviews show punctuality, work quality, communication, and verified job photos.</p>
+              <div class="rating-bars">
+                <span style="--bar: 96%"></span>
+                <span style="--bar: 88%"></span>
+                <span style="--bar: 74%"></span>
+              </div>
+            </article>
+            <article class="panel">
+              <p class="eyebrow">Payment integration</p>
+              <h3>Card, wallet, bank transfer</h3>
+              <p class="muted">Payments are authorized at booking and released after completion approval.</p>
+              <button class="primary-button compact" id="paymentDemoButton" type="button">Initialize Paystack</button>
+            </article>
+            <article class="panel">
+              <p class="eyebrow">Service history</p>
+              <div id="serviceHistory" class="timeline compact-list"></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="view" id="professional" aria-labelledby="professional-title">
+          <div class="hero-panel">
+            <div>
+              <p class="eyebrow">Professional tab</p>
+              <h1 id="professional-title">Manage your profile, documents, availability, jobs, earnings, and customer reputation.</h1>
+            </div>
+            <form class="profile-form">
+              <label><span>Display name</span><input name="name" value="Mary Ejobose" id="name"/></label>
+              <label><span>Primary trade</span><input name="occupation" value="Licensed plumber" id="occupation"/></label>
+              <button class="primary-button" type="button">Save profile</button>
+            </form>
+          </div>
+
+          <div class="pro-dashboard">
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Create profile</p>
+                  <h2>Public worker profile</h2>
+                </div>
+                <span class="pill">92% complete</span>
+              </div>
+              <div class="profile-preview">
+                <span class="pro-avatar large" style="--avatar-a:#0f766e; --avatar-b:#457b9d">MJ</span>
+                <div>
+                  <h3>Mary Ejobose</h3>
+                  <p class="muted">Leak repair, pipe fitting, water heater service. Verified license and insurance.</p>
+                  <div class="pro-skills"><span>Licensed</span><span>Insured</span><span>Same-day</span></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Certifications and work photos</p>
+                  <h2>Uploads</h2>
+                </div>
+                <button class="ghost-button" type="button">Upload</button>
+              </div>
+              <div class="upload-grid">
+                <div>License.pdf<span>Verified</span></div>
+                <div>Insurance.jpg<span>Pending</span></div>
+                <div>Sink repair.png<span>Live</span></div>
+                <div>Heater install.png<span>Live</span></div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Set availability</p>
+                  <h2>Weekly slots</h2>
+                </div>
+                <span class="pill">Online</span>
+              </div>
+              <div class="availability-grid">
+                <button class="selected" type="button">Mon 9-5</button>
+                <button class="selected" type="button">Tue 9-5</button>
+                <button type="button">Wed off</button>
+                <button class="selected" type="button">Thu 12-8</button>
+                <button class="selected" type="button">Fri 9-5</button>
+                <button type="button">Sat custom</button>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Accept or reject jobs</p>
+                  <h2>Incoming requests</h2>
+                </div>
+                <span class="pill">3 open</span>
+              </div>
+              <div id="jobQueue" class="job-list"></div>
+            </section>
+
+            <section class="panel earnings-panel">
+              <p class="eyebrow">Earnings dashboard</p>
+              <div class="metric-grid">
+                <div><span>This week</span><strong>NGN 286k</strong></div>
+                <div><span>Completed</span><strong>18 jobs</strong></div>
+                <div><span>Payout date</span><strong>Fri</strong></div>
+              </div>
+              <div class="earnings-bars" aria-hidden="true">
+                <span style="height:42%"></span><span style="height:76%"></span><span style="height:64%"></span><span style="height:88%"></span><span style="height:58%"></span>
+              </div>
+            </section>
+
+            <section class="panel">
+              <p class="eyebrow">Customer ratings</p>
+              <h2>4.98 overall</h2>
+              <div class="review-list">
+                <p><strong>Tomi A.</strong> Clean repair, arrived early, clear pricing.</p>
+                <p><strong>Nnenna O.</strong> Shared photos before and after the work.</p>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="admin" aria-labelledby="admin-title">
+          <div class="hero-panel admin-hero">
+            <div>
+              <p class="eyebrow">Admin tab</p>
+              <h1 id="admin-title">Verify workers, resolve disputes, manage payments, and monitor marketplace performance.</h1>
+            </div>
+            <div class="metric-grid admin-metrics">
+              <div><span>GMV today</span><strong>NGN 4.8m</strong></div>
+              <div><span>Fill rate</span><strong>91%</strong></div>
+              <div><span>Open disputes</span><strong>7</strong></div>
+            </div>
+          </div>
+
+          <div class="admin-grid">
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Verify workers</p>
+                  <h2>Review queue</h2>
+                </div>
+                <span class="pill">12 pending</span>
+              </div>
+              <div id="verificationQueue" class="admin-list"></div>
+            </section>
+
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Resolve disputes</p>
+                  <h2>Case center</h2>
+                </div>
+                <button class="ghost-button" type="button">Assign agent</button>
+              </div>
+              <div id="disputeList" class="admin-list"></div>
+            </section>
+
+            <section class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Manage payments</p>
+                  <h2>Escrow and payouts</h2>
+                </div>
+                <span class="pill">Balanced</span>
+              </div>
+              <div class="payment-rows">
+                <div><span>Authorized</span><strong>NGN 1.2m</strong></div>
+                <div><span>In escrow</span><strong>NGN 3.6m</strong></div>
+                <div><span>Ready payout</span><strong>NGN 820k</strong></div>
+              </div>
+            </section>
+
+            <section class="panel analytics-panel">
+              <p class="eyebrow">Analytics dashboard</p>
+              <div class="metric-grid">
+                <div><span>Bookings</span><strong>1,482</strong></div>
+                <div><span>Repeat customers</span><strong>64%</strong></div>
+                <div><span>Avg response</span><strong>4 min</strong></div>
+              </div>
+              <div class="analytics-chart" aria-hidden="true">
+                <span style="height:48%"></span><span style="height:62%"></span><span style="height:54%"></span><span style="height:72%"></span><span style="height:84%"></span><span style="height:78%"></span><span style="height:92%"></span>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="mobile-nav" aria-label="Mobile navigation">
+      <button class="active" type="button" data-view="customer">Customer</button>
+      <button type="button" data-view="professional">Pro</button>
+      <button type="button" data-view="admin">Admin</button>
+    </div>
+
+    <dialog class="modal" id="loginModal">
+      <form id="loginForm">
+        <div class="section-heading">
+          <h2>Log in</h2>
+          <button class="icon-button" type="button" data-close-modal aria-label="Close">X</button>
+        </div>
+        <label><span>Email or phone</span><input name="email" value="customer@bookpro.ng" placeholder="you@example.com" required /></label>
+        <label><span>Password</span><input name="password" type="password" value="demo-password" placeholder="Password" required /></label>
+        <p class="form-status" id="loginStatus"></p>
+        <button class="primary-button" type="submit">Continue</button>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="signupModal">
+      <form id="signupForm">
+        <div class="section-heading">
+          <h2>Create account</h2>
+          <button class="icon-button" type="button" data-close-modal aria-label="Close">X</button>
+        </div>
+        <label><span>I am a</span><select name="role"><option value="Customer">Customer</option><option value="Professional">Professional</option></select></label>
+        <label><span>Full name</span><input name="name" placeholder="Your name" required /></label>
+        <label><span>Email</span><input name="email" type="email" placeholder="you@example.com" required /></label>
+        <label><span>Phone</span><input name="phone" placeholder="+2348012345678" required /></label>
+        <label><span>Password</span><input name="password" type="password" placeholder="Choose a password" required /></label>
+        <p class="form-status" id="signupStatus"></p>
+        <button class="primary-button" type="submit">Create account</button>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>

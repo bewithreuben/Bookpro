@@ -1,0 +1,192 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  CUSTOMER
+  PROFESSIONAL
+  ADMIN
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum BookingStatus {
+  REQUESTED
+  CONFIRMED
+  REJECTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  DISPUTED
+}
+
+enum PaymentStatus {
+  PENDING
+  AUTHORIZED
+  RELEASED
+  REFUNDED
+  FAILED
+}
+
+enum DisputeStatus {
+  OPEN
+  NEEDS_EVIDENCE_REVIEW
+  AGENT_ASSIGNED
+  RESOLVED
+}
+
+model User {
+  id             String          @id @default(cuid())
+  role           UserRole
+  name           String
+  email          String          @unique
+  phone          String?         @unique
+  passwordHash   String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  professional   Professional?
+  customerJobs   Booking[]       @relation("CustomerBookings")
+  sentMessages   Message[]
+  reviews        Review[]
+  auditLogs      AuditLog[]
+}
+
+model Professional {
+  id                 String             @id @default(cuid())
+  userId             String             @unique
+  user               User               @relation(fields: [userId], references: [id])
+  service            String
+  title              String
+  location           String
+  latitude           Float?
+  longitude          Float?
+  distance           Float              @default(0)
+  eta                String             @default("Today")
+  price              Int
+  rating             Float              @default(0)
+  reviewCount        Int                @default(0)
+  completedJobsLabel String             @default("0")
+  skills             String[]           @default([])
+  colors             String[]           @default([])
+  slots              String[]           @default([])
+  availability       String[]           @default([])
+  verificationStatus VerificationStatus @default(PENDING)
+  bankName           String?
+  accountName        String?
+  accountNumber      String?
+  uploads            Upload[]
+  bookings           Booking[]
+  reviews            Review[]
+  verificationItems  VerificationItem[]
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+}
+
+model Upload {
+  id             String       @id @default(cuid())
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id])
+  name           String
+  status         String
+  url            String?
+  createdAt      DateTime     @default(now())
+}
+
+model Booking {
+  id             String        @id @default(cuid())
+  customerId     String
+  customer       User          @relation("CustomerBookings", fields: [customerId], references: [id])
+  professionalId String
+  professional   Professional  @relation(fields: [professionalId], references: [id])
+  service        String
+  location       String
+  slot           String
+  amount         Int
+  status         BookingStatus @default(REQUESTED)
+  paymentStatus  PaymentStatus @default(PENDING)
+  reference      String        @unique
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  payments       Payment[]
+  messages       Message[]
+  review         Review?
+  disputes       Dispute[]
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  bookingId   String
+  booking     Booking       @relation(fields: [bookingId], references: [id])
+  provider    String        @default("paystack")
+  reference   String        @unique
+  amount      Int
+  status      PaymentStatus @default(PENDING)
+  channel     String?
+  providerRaw Json?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  bookingId String
+  booking   Booking  @relation(fields: [bookingId], references: [id])
+  senderId  String
+  sender    User     @relation(fields: [senderId], references: [id])
+  body      String
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id             String       @id @default(cuid())
+  bookingId      String       @unique
+  booking        Booking      @relation(fields: [bookingId], references: [id])
+  professionalId String
+  professional   Professional @relation(fields: [professionalId], references: [id])
+  customerId     String
+  customer       User         @relation(fields: [customerId], references: [id])
+  rating         Int
+  body           String
+  createdAt      DateTime     @default(now())
+}
+
+model Dispute {
+  id         String        @id @default(cuid())
+  bookingId  String
+  booking    Booking       @relation(fields: [bookingId], references: [id])
+  issue      String
+  status     DisputeStatus @default(OPEN)
+  amountHeld Int
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+}
+
+model VerificationItem {
+  id             String             @id @default(cuid())
+  professionalId String?
+  professional   Professional?      @relation(fields: [professionalId], references: [id])
+  name           String
+  trade          String
+  docs           String
+  status         VerificationStatus @default(PENDING)
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation(fields: [actorId], references: [id])
+  action    String
+  target    String
+  metadata  Json?
+  createdAt DateTime @default(now())
+}

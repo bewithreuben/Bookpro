@@ -1,0 +1,22 @@
+<svg width="960" height="320" viewBox="0 0 960 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">BookPro Services logo</title>
+  <desc id="desc">A modern BookPro Services logo with a calendar, check mark, and service badge mark.</desc>
+  <rect width="960" height="320" rx="48" fill="#F8FAFC"/>
+  <g transform="translate(72 60)">
+    <rect x="0" y="0" width="200" height="200" rx="44" fill="#0F766E"/>
+    <path d="M52 64C52 51.85 61.85 42 74 42H126C138.15 42 148 51.85 148 64V142C148 154.15 138.15 164 126 164H74C61.85 164 52 154.15 52 142V64Z" fill="#FFFFFF"/>
+    <path d="M52 76H148" stroke="#0F766E" stroke-width="12" stroke-linecap="round"/>
+    <path d="M78 38V62" stroke="#F6BD60" stroke-width="12" stroke-linecap="round"/>
+    <path d="M122 38V62" stroke="#F6BD60" stroke-width="12" stroke-linecap="round"/>
+    <path d="M75 112L94 131L130 91" stroke="#0F766E" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="158" cy="158" r="34" fill="#F6BD60"/>
+    <path d="M145 158H171" stroke="#0F172A" stroke-width="9" stroke-linecap="round"/>
+    <path d="M158 145V171" stroke="#0F172A" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(322 92)">
+    <text x="0" y="74" fill="#0F172A" font-family="Inter, Arial, Helvetica, sans-serif" font-size="72" font-weight="800" letter-spacing="0">BookPro</text>
+    <text x="4" y="130" fill="#457B9D" font-family="Inter, Arial, Helvetica, sans-serif" font-size="42" font-weight="700" letter-spacing="3">SERVICES</text>
+    <rect x="4" y="152" width="386" height="8" rx="4" fill="#F6BD60"/>
+    <text x="4" y="196" fill="#475569" font-family="Inter, Arial, Helvetica, sans-serif" font-size="24" font-weight="500" letter-spacing="0">Verified professionals. Secure bookings.</text>
+  </g>
+</svg>
