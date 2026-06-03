@@ -12,4 +12,4 @@ Nigeria's first marketplace for customers to book verified skilled professionals
 - Prisma seed script: `prisma/seed.js`
 - Local JSON fallback: `data/store.json`
 
-The API uses Prisma/PostgreSQL when `DATABASE_URL` is configured and `@prisma/client` is installed/generated. Without those dependencies, it falls back to `data/store.json` so the local prototype remains runnable.
+The API uses Prisma/PostgreSQL when `DATABASE_URL` is configured and `@prisma/client` is installed. Without those dependencies, it falls back to `data/store.json` so the local prototype remains runnable.
